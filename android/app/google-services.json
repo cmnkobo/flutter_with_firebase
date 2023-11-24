@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "968517187398",
+    "project_id": "chris-van123",
+    "storage_bucket": "chris-van123.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968517187398:android:1a633e3794b4b232eb9747",
+        "android_client_info": {
+          "package_name": "com.example.vandad_course"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqW054atgKaRHVYFLItYuVB5uLdni8qc4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
