@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
+import 'package:vandad_course/views/constants/routes.dart';
+
 enum MenuAction { logout }
 
 class LoggedInHome extends StatefulWidget {
@@ -30,7 +32,7 @@ class _LoggedInHomeState extends State<LoggedInHome> {
                     await FirebaseAuth.instance.signOut();
                     // ignore: use_build_context_synchronously
                     Navigator.pushNamedAndRemoveUntil(
-                        context, "/login/", (route) => false);
+                        context, loginRoute, (route) => false);
                   }
               }
             },
@@ -44,6 +46,11 @@ class _LoggedInHomeState extends State<LoggedInHome> {
               ];
             },
           )
+        ],
+      ),
+      body: const Column(
+        children: [
+          Text('This is where the app UI will be coded'),
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:vandad_course/firebase_options.dart';
+import 'package:vandad_course/views/constants/routes.dart';
 import 'package:vandad_course/views/loggedinhome.dart';
 import 'package:vandad_course/views/login_view.dart';
 import 'package:vandad_course/views/register_view.dart';
@@ -28,9 +29,9 @@ class Chrisvad extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const Homepage(),
       routes: {
-        '/login/': (context) => const LoginView(),
-        '/register/': (context) => const RegisterView(),
-        '/loggedinhome/': (context) => const LoggedInHome(),
+        loginRoute: (context) => const LoginView(),
+        registerRoute: (context) => const RegisterView(),
+        loggedinhomeRoute: (context) => const LoggedInHome(),
       },
     );
   }
