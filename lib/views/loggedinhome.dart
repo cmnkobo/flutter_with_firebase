@@ -48,9 +48,16 @@ class _LoggedInHomeState extends State<LoggedInHome> {
           )
         ],
       ),
-      body: const Column(
+      body: Column(
         children: [
-          Text('This is where the app UI will be coded'),
+          const Text('This is where the app UI will be coded'),
+          TextButton(
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil(loginRoute, (route) => false);
+              },
+              child: const Text('Signout'))
         ],
       ),
     );

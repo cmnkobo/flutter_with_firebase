@@ -32,6 +32,7 @@ class Chrisvad extends StatelessWidget {
         loginRoute: (context) => const LoginView(),
         registerRoute: (context) => const RegisterView(),
         loggedinhomeRoute: (context) => const LoggedInHome(),
+        verifyEmailRoute: (context) => const VerifyEmailView(),
       },
     );
   }

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vandad_course/utilities/show_error_dialog.dart';
 import 'dart:developer' as devtools show log;
 import 'package:vandad_course/views/constants/routes.dart';
 
@@ -99,27 +100,38 @@ class _RegisterViewState extends State<RegisterView> {
                   color: Colors.blue,
                 ),
                 child: TextButton(
-                  onPressed: () async {
+                  onPressed: () {
                     final email = _emailController.text;
                     final password = _passwordController.text;
-                    try {
-                      final userCredentail = await FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                        email: email,
-                        password: password,
-                      );
-                      devtools.log('$userCredentail');
-                    } on FirebaseAuthException catch (e) {
-                      if (e.code == 'Weak password') {
-                        devtools.log("Weak password");
-                      } else if (e.code == 'email-already-in-use') {
-                        devtools.log('Email already in use ');
-                      } else if (e.code == "invalid-email") {
-                        devtools.log('Invalid email');
-                      } else {
-                        devtools.log(e.toString());
+                    var localContext = context;
+                    Future<void> register() async {
+                      try {
+                        final userCredentail = await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                          email: email,
+                          password: password,
+                        );
+                        final user = FirebaseAuth.instance.currentUser;
+                        await user?.sendEmailVerification();
+
+                        Navigator.pushNamed(context, verifyEmailRoute);
+
+                        devtools.log('$userCredentail');
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'Weak-password') {
+                          await showErrorDialog(localContext, 'Weak Password');
+                          devtools.log("Weak password");
+                        } else if (e.code == 'email-already-in-use') {
+                          devtools.log('Email already in use ');
+                        } else if (e.code == "invalid-email") {
+                          devtools.log('Invalid email');
+                        } else {
+                          devtools.log(e.toString());
+                        }
                       }
                     }
+
+                    register();
                   },
                   child: const Text(
                     'Register',
