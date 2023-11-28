@@ -1,10 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vandad_course/enums/menu_action.dart';
+import 'package:vandad_course/services/auth/auth_service.dart';
 import 'dart:developer' as devtools show log;
 
 import 'package:vandad_course/views/constants/routes.dart';
-
-enum MenuAction { logout }
 
 class LoggedInHome extends StatefulWidget {
   const LoggedInHome({super.key});
@@ -29,7 +28,7 @@ class _LoggedInHomeState extends State<LoggedInHome> {
                   final shouldLogout = await showLoggedOutDialog(context);
                   devtools.log(shouldLogout.toString());
                   if (shouldLogout) {
-                    await FirebaseAuth.instance.signOut();
+                    await AuthService.firebase().logOut();
                     // ignore: use_build_context_synchronously
                     Navigator.pushNamedAndRemoveUntil(
                         context, loginRoute, (route) => false);
@@ -53,7 +52,7 @@ class _LoggedInHomeState extends State<LoggedInHome> {
           const Text('This is where the app UI will be coded'),
           TextButton(
               onPressed: () async {
-                await FirebaseAuth.instance.signOut();
+                await AuthService.firebase().logOut();
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil(loginRoute, (route) => false);
               },

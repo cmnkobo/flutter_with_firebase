@@ -1,10 +1,12 @@
 import 'package:vandad_course/services/auth/auth_providers.dart';
 import 'package:vandad_course/services/auth/auth_user.dart';
+import 'package:vandad_course/services/auth/firebase_auth_providers.dart';
 
 class AuthService implements AuthProviders {
   final AuthProviders providers;
 
   AuthService(this.providers);
+  factory AuthService.firebase() => AuthService(FirebaseAuthProvider());
 
   @override
   Future<AuthUser> createUser({
@@ -17,7 +19,6 @@ class AuthService implements AuthProviders {
       );
 
   @override
-  // TODO: implement currentUser
   AuthUser? get currentUser => providers.currentUser;
 
   @override
@@ -35,4 +36,7 @@ class AuthService implements AuthProviders {
 
   @override
   Future<void> sendEmailVerification() => providers.sendEmailVerification();
+
+  @override
+  Future<void> initialize() => providers.initialize();
 }
